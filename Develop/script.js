@@ -47,7 +47,7 @@ function getLength() {
  }
  // if input is a number, but wrong value, ALERT the user, cal getLength again
  if(length < 8 || length > 128) {
-  window.alert("Lenght must be at least 8 and no more than 128");
+  window.alert("Length must be at least 8 and no more than 128");
   return getLength();
  }
  // othewrise, simply return length;
