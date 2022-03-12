@@ -10,25 +10,28 @@ var potentialCharacters = {
 }
 
 function getCharacters() {
-  
+
   var characters = "";
-  
+
   var lowercase = window.confirm("Do you want lower-case characters?")
-  if(lowercase) {
+  if (lowercase) {
     characters = characters + potentialCharacters.lowercase;
   }
   var uppercase = window.confirm("Do you want upper-case characters?")
-  if(uppercase) {
+  if (uppercase) {
     characters = characters + potentialCharacters.uppercase;
   }
   var numbers = window.confirm("Do you want to use numbers?")
-  if(numbers) {
+  if (numbers) {
     characters = characters + potentialCharacters.numbers;
   }
-
   var symbols = window.confirm("Do you want to use symbols?")
   if (symbols) {
     characters = characters + potentialCharacters.symbols;
+  }
+  if (characters.length === 0) {
+    window.alert("You must select at least one character set");
+    return getCharacters();
   }
 
   return characters;
@@ -39,22 +42,34 @@ function getCharacters() {
 function getLength() {
   var length = window.prompt("Please enter a password length (must be between 8 to 128)")
   length = parseInt(length);
- // isNaN(length)
- // if input is NaN, ALERT the user, call getLength again
- if(isNaN(length)) {
-   window.alert("Please enter a number");
-   return getLength();
- }
- // if input is a number, but wrong value, ALERT the user, cal getLength again
- if(length < 8 || length > 128) {
-  window.alert("Length must be at least 8 and no more than 128");
-  return getLength();
- }
- // othewrise, simply return length;
- return length;
+
+  // if input is NaN, ALERT the user, call getLength again
+  if (isNaN(length)) {
+    window.alert("Please enter a number");
+    return getLength();
+  }
+
+  // if input is a number, but wrong value, ALERT the user, cal getLength again
+  if (length < 8 || length > 128) {
+    window.alert("Length must be at least 8 and no more than 128");
+    return getLength();
+  }
+
+  // othewrise, simply return length;
+  return length;
 }
 
+function makePassword(characters, length) {
+  console.log(characters);
+  console.log(length);
+  var password = "";
+  for (var i = 0; i < length; i++) {
+    var randomChar = characters[Math.floor(Math.random() * characters.length)]
+    password += randomChar;
+  }
 
+  return password;
+}
 
 function generatePassword() {
   var characters = getCharacters();
